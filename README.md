@@ -7,4 +7,4 @@ These are a couple of small scripts for students attending "Capacity Planning" c
 __NB__ These scripts don't do any magic, they just return the numerical value once the problem is set. The numerical solution is not required during the exam, since it may take a long time to do these calculations by hand, but I think that sometimes having the actual numbers could be interesting and makes you understand if you made some serious mistakes.
 
 
-For any mistake/error that you find feel free to open a pull request and don't tell it to the prof. or he beats me up
+For any mistake/error that you find feel free to open a pull request and don't tell it to the prof. or he cancels my grade
