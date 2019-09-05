@@ -5,3 +5,6 @@ These are a couple of small scripts for students attending "Capacity Planning" c
   - Mean Value Analysis (MVA): calculate the response time, the throughput and identify the bottleneck when you have _multiple M/M/1 queues in serial_
   
 __NB__ These scripts don't do any magic, they just return the numerical value once the problem is set. The numerical solution is not required during the exam, since it may take a long time to do these calculations by hand, but I think that sometimes having the actual numbers could be interesting and makes you understand if you made some serious mistakes.
+
+
+For any mistake/error that you find feel free to open a pull request
