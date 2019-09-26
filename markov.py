@@ -77,7 +77,11 @@ def markov(n_states, draw=False):
 
 	# let's draw the Markov chain (if necessary)
 	if draw:
-		from graphviz import Digraph
+		try:
+			from graphviz import Digraph
+		except ImportError:
+			raise Exception(graphviz_err)
+
 
 		graph_name = f"Markov_{n_states}_states"
 		dot = Digraph(comment=graph_name, format='png')
@@ -93,7 +97,11 @@ def markov(n_states, draw=False):
 				dot.edge(str(i + 1), str(i), label=str(mu_to[i]))
 		dot.graph_attr['rankdir'] = 'LR'  # set an intuitive orientation
 
-		dot.render(f"output/{graph_name}.gv", view=True)
+		try:
+			dot.render(f"output/{graph_name}.gv", view=True)
+		except Exception as e:
+			print(graphviz_err, '\n\n\n')
+			raise e
 
 
 def setup_parser():
@@ -103,6 +111,13 @@ def setup_parser():
 
 	# create the parser
 	return parser.parse_args()
+
+
+graphviz_err = '''\nPackage "graphviz" missing or not correctly installed. Fix by:
+\t1. Run "pip install graphviz", or pip3
+\t2. (Linux only) Run "sudo apt install graphviz"
+\t2. (Winzozz only) Go here https://graphviz.gitlab.io/_pages/Download/Download_windows.html download and extract the zip wherever you want (maybe in Program Files). Then add "bin" folder to your PATH environment variable'''
+
 
 
 if __name__ == '__main__':
