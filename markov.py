@@ -108,4 +108,5 @@ def setup_parser():
 if __name__ == '__main__':
 	args = setup_parser()
 	n_states = int(input("Max number of requests waiting inside the system: "))
-	markov(n_states, draw=args.draw)
+	if n > 0:
+		markov(n_states, draw=args.draw)
