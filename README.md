@@ -8,3 +8,44 @@ __NB__ These scripts don't do any magic, they just return the numerical value on
 
 
 For any mistake/error that you find feel free to open a pull request and don't tell it to the prof. or he cancels my grade
+
+## Examples
+
+    $ python markov.py --draw
+
+    Max number of requests waiting inside the system: 5
+     -> Lambda from 0 to 1 : 1
+     -> Lambda from 1 to 2 (empty to autocomplete from previous):
+    Autocomplete
+     -> Lambda from 1 to 2: 1.0
+     -> Lambda from 2 to 3: 1.0
+     -> Lambda from 3 to 4: 1.0
+     -> Lambda from 4 to 5: 1.0
+     <- Mu from 1 to 0 : 2
+     <- Mu from 2 to 1 (empty to autocomplete from previous):
+    Autocomplete
+     <- Mu from 2 to 1: 2.0
+     <- Mu from 3 to 2: 2.0
+     <- Mu from 4 to 3: 2.0
+     <- Mu from 5 to 4: 2.0
+    
+    P0 = 0.51
+    P1 = 0.25
+    P2 = 0.13
+    P3 = 0.06
+    P4 = 0.03
+    P5 = 0.02
+    
+    >>> Utilization factor (1-P0): 0.492
+    
+    >>> Fraction of lost requests (P5): 0.016
+    
+    >>> X mean = 0.98 requests/s
+    >>> X mean normalized = 2.00 requests/s
+    
+    >>> N mean = 0.83 requests
+    
+    >>> R mean = 0.84 s
+    >>> R mean normalized = 0.41 s
+
+<img src="examples/markov.png">
