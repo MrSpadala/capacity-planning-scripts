@@ -4,8 +4,8 @@ in the system you want to calculate the results. It then outputs the mean respon
 mean throughput and how the requests are "spread" inside the different queues, for each
 number of requests from 1 to N"""
 
-__author__      = "Pietro Spadaccino"
 
+# Author: Pietro Spadaccino
 
 
 

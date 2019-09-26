@@ -3,9 +3,10 @@ service rate for each state (autocomplete from previous input also available)
 and prints probability to be in each state alongside with mean response time,
 mean throughput and mean requests waiting in the system"""
 
-import argparse
+# Authors: Pietro Spadaccino, Luigi Russo
 
-__author__ = "Pietro Spadaccino"
+
+import argparse
 
 
 def markov(n_states, draw=False):
