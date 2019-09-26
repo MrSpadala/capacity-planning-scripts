@@ -1,18 +1,16 @@
-
-"""markov.py: Input the length of the Markov chain, the arrival rate and the 
+"""markov.py: Input the length of the Markov chain, the arrival rate and the
 service rate for each state (autocomplete from previous input also available)
 and prints probability to be in each state alongside with mean response time,
 mean throughput and mean requests waiting in the system"""
 
-__author__      = "Pietro Spadaccino"
+import argparse
+
+__author__ = "Pietro Spadaccino"
 
 
-
-
-def markov(n_states):
-	lambda_from = [0] * n_states   #lambda_from[i]: lambda from state i to state i+1
-	mu_to = [0] * n_states         #mu_to[i]: mu to state i from state i-1
-
+def markov(n_states, draw=False):
+	lambda_from = [0] * n_states   # lambda_from[i]: lambda from state i to state i+1
+	mu_to = [0] * n_states         # mu_to[i]: mu to state i from state i-1
 
 	def autocomplete(is_lambda, i):
 		print("Autocomplete")
@@ -24,7 +22,6 @@ def markov(n_states):
 				print(f" -> Lambda from {j} to {j+1}: {val}")
 			else:
 				print(f" <- Mu from {j+1} to {j}: {val}")
-
 
 	# Input lambda
 	for i in range(n_states):
@@ -42,8 +39,6 @@ def markov(n_states):
 			break
 		mu_to[i] = float(l)
 
-
-
 	# Calculate coefficients (Pi = coefficients[i+1]*P0)
 	coefficients = [lambda_from[0] / mu_to[0]]
 	for i in range(1, n_states):
@@ -52,7 +47,6 @@ def markov(n_states):
 
 	P0 = 1/(sum(coefficients)+1)     # equation P0+c1P0+c2P0+...=1
 	P = [c*P0 for c in coefficients]
-
 
 	# Format response
 	s_format = ""
@@ -64,7 +58,6 @@ def markov(n_states):
 
 	print(f">>> Utilization factor (1-P0): {1-P0:.3f}\n")
 	print(f">>> Fraction of lost requests (P{n_states}): {P[-1]:.3f}\n")
-
 
 	# Calculate N,X,R mean
 	X_mean = sum([p*x for p,x in zip(P, mu_to)])
@@ -82,10 +75,37 @@ def markov(n_states):
 	print(f">>> R mean = {R_mean:.2f} s")
 	print(f">>> R mean normalized = {R_mean*(1-P0):.2f} s\n")
 
+	# let's draw the Markov chain (if necessary)
+	if draw:
+		from graphviz import Digraph
 
+		graph_name = f"Markov_{n_states}_states"
+		dot = Digraph(comment=graph_name, format='png')
+		with dot.subgraph() as s:
+			s.attr(rank='same')
+			for i in range(n_states + 1):
+				if i == 0:
+					dot.node(str(i), f"{i}\n({P0:.2f})")
+				else:
+					dot.node(str(i), f"{i}\n({P[i - 1]:.2f})")
+			for i in range(n_states):
+				dot.edge(str(i), str(i + 1), label=str(lambda_from[i]))
+				dot.edge(str(i + 1), str(i), label=str(mu_to[i]))
+		dot.graph_attr['rankdir'] = 'LR'  # set an intuitive orientation
+
+		dot.render(f"output/{graph_name}.gv", view=True)
+
+
+def setup_parser():
+	# set the main parser
+	parser = argparse.ArgumentParser(description='Markov Chain')
+	parser.add_argument('--draw', help='output the Markov chain as png image', action='store_true')
+
+	# create the parser
+	return parser.parse_args()
 
 
 if __name__ == '__main__':
+	args = setup_parser()
 	n_states = int(input("Max number of requests waiting inside the system: "))
-	markov(n_states)
-
+	markov(n_states, draw=args.draw)
