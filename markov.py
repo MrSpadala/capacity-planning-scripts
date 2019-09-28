@@ -74,7 +74,7 @@ def markov(n_states, draw=False):
 	print(f">>> N mean = {N_mean:.2f} requests\n")
 
 	print(f">>> R mean = {R_mean:.2f} s")
-	print(f">>> R mean normalized = {R_mean*(1-P0):.2f} s\n")
+	print(f">>> R mean normalized = {R_mean/(1-P0):.2f} s\n")
 
 	# let's draw the Markov chain (if necessary)
 	if draw:
