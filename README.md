@@ -11,6 +11,8 @@ For any mistake/error that you find feel free to open a pull request and don't t
 
 ## Examples
 
+ __markov.py__
+
     $ python markov.py --draw
 
     Max number of requests waiting inside the system: 5
@@ -49,3 +51,50 @@ For any mistake/error that you find feel free to open a pull request and don't t
     >>> R mean normalized = 0.41 s
 
 <img src="examples/markov.png">
+
+---
+
+- __MVA.py__
+
+```
+$ python MVA.py --plot
+
+Number of queues in series: 5
+Insert service time (D) of queue 0 (in ms): 12
+Insert service time (D) of queue 1 (in ms): 13
+Insert service time (D) of queue 2 (in ms): 11
+Insert service time (D) of queue 3 (in ms): 9
+Insert service time (D) of queue 4 (in ms): 8
+Input N (calculate MVA from 1 to N incoming requests ): 20
+
+>>> N = 1
+        R(1) = 0.053 s
+        X(1) = 18.87 requests/s
+        n in queues: ['0.23', '0.25', '0.21', '0.17', '0.15']
+        - - - - - - - - - - - - - - -
+
+>>> N = 2
+        R(2) = 0.064 s
+        X(2) = 31.29 requests/s
+        n in queues: ['0.46', '0.51', '0.42', '0.33', '0.29']
+        - - - - - - - - - - - - - - -
+
+>>> N = 3
+        R(3) = 0.075 s
+        X(3) = 40.03 requests/s
+        n in queues: ['0.70', '0.78', '0.62', '0.48', '0.41']
+        - - - - - - - - - - - - - - - 
+[ ... ]
+
+>>> N = 19
+        R(19) = 0.262 s
+        X(19) = 72.49 requests/s
+        n in queues: ['4.95', '7.49', '3.42', '1.80', '1.35']
+        - - - - - - - - - - - - - - -
+
+>>> N = 20
+        R(20) = 0.274 s
+        X(20) = 72.92 requests/s
+        n in queues: ['5.20', '8.05', '3.54', '1.84', '1.37']
+        - - - - - - - - - - - - - - -
+```
