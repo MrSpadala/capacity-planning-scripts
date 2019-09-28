@@ -98,3 +98,9 @@ Input N (calculate MVA from 1 to N incoming requests ): 20
         n in queues: ['5.20', '8.05', '3.54', '1.84', '1.37']
         - - - - - - - - - - - - - - -
 ```
+
+<img src="examples/throughput.png" width=380 height=300>
+
+<img src="examples/response-time.png" width=380 height=300>
+
+<img src="examples/requests-in-queues.png" width=380 height=300>
