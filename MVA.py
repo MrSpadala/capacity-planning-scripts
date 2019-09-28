@@ -7,11 +7,10 @@ number of requests from 1 to N"""
 
 # Author: Pietro Spadaccino
 
+import argparse
 
-from matplotlib import pyplot as plt
 
-
-def MVA(D_queues, N):
+def MVA(D_queues, N, plot=False):
 
 	# Vectors to plot later
 	R_vect = []
@@ -43,11 +42,14 @@ def MVA(D_queues, N):
 	"""
 		print(status)
 
-	plot(R_vect, R_tot_vect, X_vect, N_req_vect, N)
+	if plot:
+		plot_results(R_vect, R_tot_vect, X_vect, N_req_vect, N)
 
 
 
-def plot(R, R_tot, X, N_req, N):
+def plot_results(R, R_tot, X, N_req, N):
+	from matplotlib import pyplot as plt
+
 	n_queues = len(R[0])
 
 	plt.title("Throughput")
@@ -77,8 +79,14 @@ def plot(R, R_tot, X, N_req, N):
 	plt.show()
 
 
+def setup_parser():
+	parser = argparse.ArgumentParser(description='MVA')
+	parser.add_argument('--plot', help='plot MVA results on a graph', action='store_true')
+	return parser.parse_args()
+
 
 if __name__ == '__main__':
+	args = setup_parser()
 	n_queues = int(input("Number of queues in series: "))
 	D_queues = []
 	for i in range(n_queues):
@@ -87,6 +95,6 @@ if __name__ == '__main__':
 
 	N = int(input("Input N (calculate MVA from 1 to N incoming requests ): "))
 
-	MVA(D_queues, N)
+	MVA(D_queues, N, plot=args.plot)
 
 
