@@ -26,19 +26,19 @@ def markov(n_states, draw=False):
 
 	# Input lambda
 	for i in range(n_states):
-		l = input(f" -> Lambda from {i} to {i+1} {'(empty to autocomplete from previous)' if i else ''}: ")
-		if l=="":
+		val = input(f" -> Lambda from {i} to {i+1} {'(empty to autocomplete from previous)' if i else ''}: ")
+		if val == "":
 			autocomplete(True, i)
 			break
-		lambda_from[i] = float(l)
+		lambda_from[i] = float(val)
 
 	# Input mu
 	for i in range(n_states):
-		l = input(f" <- Mu from {i+1} to {i} {'(empty to autocomplete from previous)' if i else ''}: ")
-		if l=="":
+		val = input(f" <- Mu from {i+1} to {i} {'(empty to autocomplete from previous)' if i else ''}: ")
+		if val == "":
 			autocomplete(False, i)
 			break
-		mu_to[i] = float(l)
+		mu_to[i] = float(val)
 
 	# Calculate coefficients (Pi = coefficients[i+1]*P0)
 	coefficients = [lambda_from[0] / mu_to[0]]
@@ -83,7 +83,6 @@ def markov(n_states, draw=False):
 		except ImportError:
 			raise Exception(graphviz_err)
 
-
 		graph_name = f"Markov_{n_states}_states"
 		dot = Digraph(comment=graph_name, format='png')
 		with dot.subgraph() as s:
@@ -118,7 +117,6 @@ graphviz_err = '''\nPackage "graphviz" missing or not correctly installed. Fix b
 \t1. Run "pip install graphviz", or pip3
 \t2. (Linux only) Run "sudo apt install graphviz"
 \t2. (Winzozz only) Go here https://graphviz.gitlab.io/_pages/Download/Download_windows.html download and extract the zip wherever you want (maybe in Program Files). Then add "bin" folder to your PATH environment variable'''
-
 
 
 if __name__ == '__main__':
