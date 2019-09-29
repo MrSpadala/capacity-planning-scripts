@@ -13,6 +13,7 @@ For any mistake/error that you find feel free to open a pull request and don't t
 
 - __markov.py__
 
+```
     $ python markov.py --draw
 
     Max number of requests waiting inside the system: 5
@@ -49,6 +50,7 @@ For any mistake/error that you find feel free to open a pull request and don't t
     
     >>> R mean = 0.84 s
     >>> R mean normalized = 1.70 s
+```
 
 <img src="examples/markov.png">
 
