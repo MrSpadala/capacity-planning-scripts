@@ -11,7 +11,7 @@ For any mistake/error that you find feel free to open a pull request and don't t
 
 ## Examples
 
- __markov.py__
+- __markov.py__
 
     $ python markov.py --draw
 
@@ -48,7 +48,7 @@ For any mistake/error that you find feel free to open a pull request and don't t
     >>> N mean = 0.83 requests
     
     >>> R mean = 0.84 s
-    >>> R mean normalized = 0.41 s
+    >>> R mean normalized = 1.70 s
 
 <img src="examples/markov.png">
 
