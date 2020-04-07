@@ -50,7 +50,7 @@ def plot_results(R, R_tot, X, N_req, N):
 
     plt.title("Throughput")
     plt.plot(range(1, N + 1), [1000 * x for x in X])  # convert from req/ms to req/s
-    plt.xlabel('requests'), plt.ylabel('requests / s')
+    plt.xlabel('incoming requests'), plt.ylabel('requests / s')
     plt.xticks(range(1, N + 1, 2))
     plt.xlim(1, N)
     plt.show()
@@ -59,7 +59,7 @@ def plot_results(R, R_tot, X, N_req, N):
     plt.plot(range(1, N + 1), R_tot, 'b--', label='System')
     for i in range(n_queues):
         plt.plot(range(1, N + 1), list(map(lambda x: x[i], R)), label=f'queue {i}')
-    plt.xlabel('requests'), plt.ylabel('ms')
+    plt.xlabel('incoming requests'), plt.ylabel('ms')
     plt.xticks(range(1, N + 1, 2))
     plt.xlim(1, N)
     plt.legend()
@@ -68,7 +68,7 @@ def plot_results(R, R_tot, X, N_req, N):
     plt.title("Requests inside queues")
     for i in range(n_queues):
         plt.plot(range(1, N + 1), list(map(lambda x: x[i], N_req)), label=f'queue {i}')
-    plt.xlabel('requests'), plt.ylabel('requests')
+    plt.xlabel('incoming requests'), plt.ylabel('requests in queue i')
     plt.xticks(range(1, N + 1, 2))
     plt.xlim(1, N)
     plt.legend()
@@ -91,4 +91,5 @@ if __name__ == '__main__':
 
     N = int(input("Input N (calculate MVA from 1 to N incoming requests ): "))
 
+    print("\n\n~ ~ ~  Results  ~ ~ ~\n")
     MVA(D_queues, N, plot=args.plot)

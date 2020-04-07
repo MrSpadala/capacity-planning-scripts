@@ -20,13 +20,13 @@ def markov(n_states, draw=False):
         for j in range(i, n_states):
             to_update[j] = val
             if is_lambda:
-                print(f" -> Lambda from {j} to {j + 1}: {val}")
+                print(f" -> Lambda from state {j} to state {j + 1}: {val}")
             else:
-                print(f" <- Mu from {j + 1} to {j}: {val}")
+                print(f" <- Mu from state {j + 1} to state {j}: {val}")
 
     # Input lambda
     for i in range(n_states):
-        val = input(f" -> Lambda from {i} to {i + 1} {'(empty to autocomplete from previous)' if i else ''}: ")
+        val = input(f" -> Lambda from state {i} to state {i + 1} {'(empty to autocomplete from previous)' if i else ''}: ")
         if val == "":
             autocomplete(True, i)
             break
@@ -34,7 +34,7 @@ def markov(n_states, draw=False):
 
     # Input mu
     for i in range(n_states):
-        val = input(f" <- Mu from {i + 1} to {i} {'(empty to autocomplete from previous)' if i else ''}: ")
+        val = input(f" <- Mu from state {i + 1} to state {i} {'(empty to autocomplete from previous)' if i else ''}: ")
         if val == "":
             autocomplete(False, i)
             break
@@ -49,11 +49,15 @@ def markov(n_states, draw=False):
     P0 = 1 / (sum(coefficients) + 1)  # equation P0+c1P0+c2P0+...=1
     P = [c * P0 for c in coefficients]
 
+
+    print("\n\n~ ~ ~  Results  ~ ~ ~")
+
     # Format response
     s_format = ""
     for i in range(n_states):
-        s_format += f"P{i + 1} = {P[i]:.2f}\n"
-    result = f"\nP0 = {P0:.2f}\n{s_format}"
+        s_format += f"P{i + 1} = {P[i]:.3f}\n"
+    result = f"\nProbability Pi of being in state i"
+    result += f"\nP0 = {P0:.3f}\n{s_format}"
 
     print(result)
 
