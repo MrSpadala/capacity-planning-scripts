@@ -48,13 +48,14 @@ def plot_results(R, R_tot, X, N_req, N):
 
     n_queues = len(R[0])
 
+    plt.figure(1)
     plt.title("Throughput")
     plt.plot(range(1, N + 1), [1000 * x for x in X])  # convert from req/ms to req/s
     plt.xlabel('incoming requests'), plt.ylabel('requests / s')
     plt.xticks(range(1, N + 1, 2))
     plt.xlim(1, N)
-    plt.show()
 
+    plt.figure(2)
     plt.title("Response Time")
     plt.plot(range(1, N + 1), R_tot, 'b--', label='System')
     for i in range(n_queues):
@@ -63,8 +64,8 @@ def plot_results(R, R_tot, X, N_req, N):
     plt.xticks(range(1, N + 1, 2))
     plt.xlim(1, N)
     plt.legend()
-    plt.show()
 
+    plt.figure(3)
     plt.title("Requests inside queues")
     for i in range(n_queues):
         plt.plot(range(1, N + 1), list(map(lambda x: x[i], N_req)), label=f'queue {i}')
@@ -72,6 +73,7 @@ def plot_results(R, R_tot, X, N_req, N):
     plt.xticks(range(1, N + 1, 2))
     plt.xlim(1, N)
     plt.legend()
+
     plt.show()
 
 
@@ -87,7 +89,7 @@ if __name__ == '__main__':
     D_queues = []
     for i in range(n_queues):
         D = input(f"Insert service time (D) of queue {i} (in ms): ")
-        D_queues.append(int(D))
+        D_queues.append(float(D))
 
     N = int(input("Input N (calculate MVA from 1 to N incoming requests ): "))
 
